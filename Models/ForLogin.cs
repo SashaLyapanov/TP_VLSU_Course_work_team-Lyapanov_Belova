@@ -1,0 +1,8 @@
+﻿namespace TravelAgency_Prod.Models
+{
+    public class ForLogin
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}
