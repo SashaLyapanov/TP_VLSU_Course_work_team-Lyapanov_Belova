@@ -1,0 +1,18 @@
+﻿@model TravelAgency_Prod.Models.Client
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_LayoutClients";
+}
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <h1 class="display-4">@Html.DisplayFor(model => model.Name)</h1>
+</table>
