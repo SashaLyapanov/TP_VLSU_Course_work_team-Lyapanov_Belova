@@ -14,7 +14,6 @@ namespace TravelAgency_Prod.Data
         public DbSet<TourManager> tourManagers { get; set; }
         public DbSet<Client> clients { get; set; }
         public DbSet<Basket> baskets { get; set; }
-        public DbSet<Order> orders { get; set; }
         public DbSet<Tour> tours { get; set; }
         public DbSet<Favourite> favourites { get; set; }
         public DbSet<Role> roles { get; set; }

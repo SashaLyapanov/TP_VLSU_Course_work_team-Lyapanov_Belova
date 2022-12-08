@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelAgency_Prod.Data;
 
@@ -11,9 +12,10 @@ using TravelAgency_Prod.Data;
 namespace TravelAgency_Prod.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    partial class TravelAgencyContextModelSnapshot : ModelSnapshot
+    [Migration("20221202095056_ChangeAvailable")]
+    partial class ChangeAvailable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,7 @@ namespace TravelAgency_Prod.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TourId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -80,7 +82,7 @@ namespace TravelAgency_Prod.Migrations
                     b.HasIndex("ClientId")
                         .IsUnique();
 
-                    b.HasIndex("TourId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("baskets");
                 });
@@ -179,6 +181,35 @@ namespace TravelAgency_Prod.Migrations
                     b.ToTable("favourites");
                 });
 
+            modelBuilder.Entity("TravelAgency_Prod.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("PaymentStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TourId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("TourId");
+
+                    b.ToTable("orders");
+                });
+
             modelBuilder.Entity("TravelAgency_Prod.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -207,9 +238,6 @@ namespace TravelAgency_Prod.Migrations
                     b.Property<bool>("Available")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("BasketId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -226,10 +254,6 @@ namespace TravelAgency_Prod.Migrations
 
                     b.Property<DateTime>("DepartmentDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
@@ -259,8 +283,6 @@ namespace TravelAgency_Prod.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
 
                     b.HasIndex("CategoryId");
 
@@ -326,15 +348,15 @@ namespace TravelAgency_Prod.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TravelAgency_Prod.Models.Tour", "Tour")
+                    b.HasOne("TravelAgency_Prod.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("TourId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Client");
 
-                    b.Navigation("Tour");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("TravelAgency_Prod.Models.Client", b =>
@@ -359,12 +381,23 @@ namespace TravelAgency_Prod.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("TravelAgency_Prod.Models.Tour", b =>
+            modelBuilder.Entity("TravelAgency_Prod.Models.Order", b =>
                 {
                     b.HasOne("TravelAgency_Prod.Models.Basket", null)
-                        .WithMany("Tours")
+                        .WithMany("Orders")
                         .HasForeignKey("BasketId");
 
+                    b.HasOne("TravelAgency_Prod.Models.Tour", "Tour")
+                        .WithMany()
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tour");
+                });
+
+            modelBuilder.Entity("TravelAgency_Prod.Models.Tour", b =>
+                {
                     b.HasOne("TravelAgency_Prod.Models.Category", "Category")
                         .WithMany("Tours")
                         .HasForeignKey("CategoryId")
@@ -391,7 +424,7 @@ namespace TravelAgency_Prod.Migrations
 
             modelBuilder.Entity("TravelAgency_Prod.Models.Basket", b =>
                 {
-                    b.Navigation("Tours");
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("TravelAgency_Prod.Models.Category", b =>

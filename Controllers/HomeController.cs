@@ -18,25 +18,11 @@ namespace TravelAgency.Controllers
             _logger = logger;
         }
 
-        /*public async Task<IActionResult> EmailValidation([Bind("Email")] TourManager tourManager, [Bind("Email")] Client client)
-        {
-            if (_context.tourManagers.Any(x => x.Email == tourManager.Email))
-            {
-                return Json(false);
-            }
-            return Json(true);
-
-        }*/
-
         public IActionResult Index()
         {
             return View();
         }
-        [HttpGet]
-        /*        public IActionResult Index1()
-                {
-                    return View();
-                }*/
+
 
 
 
@@ -60,15 +46,31 @@ namespace TravelAgency.Controllers
 
 
 
-        public IActionResult Privacy()
+
+
+        [HttpGet]
+        public async Task<IActionResult> ToursList()
         {
-            return View();
+            var tours = _context.tours;
+            return View(tours);
         }
+
+
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AboutUs()
+        {
+            return View();
         }
     }
 }
