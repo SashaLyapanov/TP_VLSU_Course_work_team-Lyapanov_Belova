@@ -3,8 +3,21 @@ using TravelAgency_Prod.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+/*builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10000000);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = false;
+});*/
+builder.Services.AddSession();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddDistributedMemoryCache();
+
+
 
 builder.Services.AddDbContext<TravelAgencyContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -22,6 +35,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

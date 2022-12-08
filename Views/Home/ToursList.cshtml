@@ -1,0 +1,111 @@
+﻿@using TravelAgency_Prod.Models
+@model IEnumerable<Tour>
+
+@{
+    ViewData["Title"] = "ToursList";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <title>Список туров</title>
+    <script src="https://kit.fontawesome.com/3788136fec.js" crossorigin="anonymous"></script> <!-- fontawesome.com -->
+</head>
+<div>
+    <section class="section-3">
+        <div class="blur">
+    @{
+        <div class="container-section-3" id="container-section-3">
+            <div class="search-box">
+                <input class="search-txt-1" type="text" name="" placeholder="Страна">
+                <input class="search-txt" type="date" name="" placeholder="Дата отъезда">
+                <input class="search-txt" type="date" name="" placeholder="Дата приезда">
+                <input class="search-txt-2" type="text" name="" placeholder="Количество людей">
+                <a class="search-btn" href="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+            </div>
+        </div>
+
+
+
+        
+
+         
+
+            @foreach (var tour in Model)
+                {
+            
+                    <div class="container-section-3" id="container-section-3-1">
+                        <a class="element-tour" href="">
+                            <div class="element-tour-1">
+                                <div class="img-tour"></div>
+                                <div class="inf-tour" id="inf-tour-1">
+                                    <h1 class="dataTour1" id="dataTour-1">Название тура:</h1>
+                                    <p class="dataTour1">Страна:</p>
+                                    <p class="dataTour1">Кличество человек:</p>
+                                    <p class="dataTour1">Количество дней:</p>
+                                    <p class="dataTour1">Тип тура:</p>
+                                    <p class="dataTour1">Наличие:</p>
+                                    <p class="dataTour1">Цена:</p>
+                                </div>
+                                <div class="inf-tour" id="inf-tour-2">
+                                    <h1 class="dataTour" id="dataTour-1">@Html.DisplayFor(modelItem => tour.Name)</h1>                                    
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Country)</p>                                    
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.PersonCount)</p>                                    
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Duration)</p>                                    
+                                    <p class="dataTour">
+                                        @{
+                                            string massageCategory;
+                                            if (tour.CategoryId == 1)
+                                            {
+                                                massageCategory = "All inclusive";
+                                            }
+                                            else
+                                            {
+                                                massageCategory = "Business";
+                                            }
+                                        }
+                                        @massageCategory
+                                    </p>                                    
+                                    <p class ="dataTour">
+                                        @{
+                                            string massageAvailable;
+                                            if (tour.Available == true)
+                                            {
+                                                massageAvailable = "Данный тур доступен";
+                                            }
+                                            else
+                                            {
+                                                massageAvailable = "Данный тур недоступен";
+                                            }
+                                        }
+                                        @massageAvailable
+                                    </p>
+                                    <p class="dataTour" id="dataTour-cost">@Html.DisplayFor(modelItem => tour.Cost),00 $</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>    
+                    
+                }
+
+           
+            
+     }
+        </div>
+    </section>  
+</div>
+</html>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

@@ -5,4 +5,15 @@
     Layout = "~/Views/Shared/_LayoutAdmManag.cshtml";
 }
 
-<h1>Index</h1>
+<section class="section-admin">
+        <div class="blur">
+            <div class="container-admin">
+                <a class="admin-button btn-admin" id="tour" asp-controller="AdminCRUDTours" asp-action="Index">
+                    <p>Туры</p>
+                </a>
+                <a class="admin-button btn-admin" id="operator" asp-controller="AdminCRUDTourManagers" asp-action="Index">
+                    <p>Тур-менеджеры</p>
+                </a>
+            </div>
+        </div>
+    </section>

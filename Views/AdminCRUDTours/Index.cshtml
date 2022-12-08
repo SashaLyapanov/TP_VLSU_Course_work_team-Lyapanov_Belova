@@ -7,80 +7,102 @@
     Layout = "_LayoutAdmManag";
 }
 
-<h1>Index</h1>
+<div>
+    <section class="section-3">
+        <div class="blur">
+            @{
+                <div class="container-section-3" id="container-section-3">
+                    <div class="search-box">
+                        <input class="search-txt-1" type="text" name="" placeholder="Страна">
+                        <input class="search-txt" type="date" name="" placeholder="Дата отъезда">
+                        <input class="search-txt" type="date" name="" placeholder="Дата приезда">
+                        <input class="search-txt-2" type="text" name="" placeholder="Количество людей">
+                        <a class="search-btn" href="">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </div>
+                </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReturnDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hotel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PersonCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReturnDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hotel)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+                <section class="section-for-creating-btn">
+                    <a asp-action="Create">Создать новый тур</a>
+                </section>
+
+
+            @foreach (var tour in Model)
+                {
+
+                    <div class="container-section-3" id="container-section-3-1">
+                        <a class="element-tour" asp-controller="AdminCRUDTours" asp-action="Details" asp-route-id="@tour.Id">
+                            <div class="element-tour-1">
+                                <div class="img-tour"></div>
+                                <div class="inf-tour" id="inf-tour-1">
+                                    <h1 class="dataTour1" id="dataTour-1">Тур:</h1>
+                                    <p class="dataTour1">Страна:</p>
+                                    <p class="dataTour1">Кличество человек:</p>
+                                    <p class="dataTour1">Количество дней:</p>
+                                    <p class="dataTour1">Тип тура:</p>
+                                    <p class="dataTour1">Наличие:</p>
+                                </div>
+                                <div class="inf-tour" id="inf-tour-2">
+                                    <h1 class="dataTour" id="dataTour-1">@Html.DisplayFor(modelItem => tour.Name)</h1>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Country)</p>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.PersonCount)</p>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Duration)</p>
+                                    <p class="dataTour">
+                                        @{
+                                            string massageCategory;
+                                            if (tour.CategoryId == 1)
+                                            {
+                                                massageCategory = "All inclusive";
+                                            }
+                                            else
+                                            {
+                                                massageCategory = "Business";
+                                            }
+                                        }
+                                        @massageCategory
+                                    </p>
+                                    <p class="dataTour">
+                                        @{
+                                            string massageAvailable;
+                                            if (tour.Available == true)
+                                            {
+                                                massageAvailable = "Данный тур доступен";
+                                            }
+                                            else
+                                            {
+                                                massageAvailable = "Данный тур недоступен";
+                                            }
+                                        }
+                                        @massageAvailable
+                                    </p>
+                                    <p class="dataTour" id="dataTour-cost">@Html.DisplayFor(modelItem => tour.Cost),00 $</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+</div>              
+
+                @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td> *@
+            
+
+
+
+
+
+
+
+
+
+
+
+                    

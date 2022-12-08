@@ -1,0 +1,15 @@
+﻿@model TravelAgency_Prod.Models.Basket
+
+@{
+    Layout = "_LayoutClients";
+}
+
+<h1>Выполнено успешное добавление тура в вашу корзину</h1> <!--Вставить фотку или данные пациента-->
+
+
+<div>
+    @{
+        int id = (int)TempData["userIdToIndex"];
+    }
+    <a asp-controller="Clients" asp-action="Index" asp-route-id="@id">Вернуться на гравную страницу</a>
+</div>
