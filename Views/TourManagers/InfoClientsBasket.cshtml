@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<TravelAgency_Prod.Models.Tour>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ClientsTours";
 }
 @{
-    Layout = "_LayoutAdmin";
+    Layout = "_LayoutManager";
 }
 
 <div>
     <section class="section-3">
         <div class="blur">
             @{
-                <form asp-controller="Admin" asp-action="ToursListWithSearch" method="get">
+                <form asp-controller="TourManagers" asp-action="ToursListWithSearch" method="get">
                     <div class="container-section-3" id="container-section-3">
                         <div class="search-box">
                             <input class="search-txt-1" type="text" name="Country" placeholder="Страна">
@@ -27,17 +27,11 @@
                     </div>
                 </form>
 
-
-                <section class="section-for-creating-btn">
-                    <a asp-action="Create">Создать новый тур</a>
-                </section>
-
-
-            @foreach (var tour in Model)
+                @foreach (var tour in Model)
                 {
 
                     <div class="container-section-3" id="container-section-3-1">
-                        <a class="element-tour" asp-controller="AdminCRUDTours" asp-action="Details" asp-route-id="@tour.Id">
+                        <div class="element-tour-manager-client">
                             <div class="element-tour-1">
                                 <div class="img-tour"></div>
                                 <div class="inf-tour" id="inf-tour-1">
@@ -82,22 +76,22 @@
                                         @massageAvailable
                                     </p>
                                     <p class="dataTour" id="dataTour-cost">@Html.DisplayFor(modelItem => tour.Cost),00 $</p>
+                                    <a asp-controller="TourManagers" asp-action="TourFormalization" asp-route-id="@tour.Id" class="dataTour-href" id="dataTour-href">Оформить</a>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 }
             }
         </div>
     </section>
-</div>              
+</div>
 
-                @*<td>
+@*<td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td> *@
-            
 
 
 
@@ -109,4 +103,4 @@
 
 
 
-                    
+

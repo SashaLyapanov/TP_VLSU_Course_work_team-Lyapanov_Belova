@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging.Signing;
 using TravelAgency_Prod.Data;
 using TravelAgency_Prod.Models;
 
@@ -20,10 +21,18 @@ namespace TravelAgency_Prod.Controllers
         }
 
         // GET: AdminCRUDTours
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             return View(await _context.tours.ToListAsync());
+        }*/
+
+        public async Task<IActionResult> Index()
+        {
+            var tours = _context.tours.ToList();
+            return View(tours);
         }
+
+
 
         // GET: AdminCRUDTours/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -54,15 +63,12 @@ namespace TravelAgency_Prod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Country,PersonCount,Cost,DepartmentDate,ReturnDate,Duration,Hotel,TourType")] Tour tour)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(tour);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(tour);
+        public async Task<IActionResult> Create([Bind("Id,Name,Country,City,PersonCount,Cost,DepartmentDate,ReturnDate,Available,Hotel,CategoryId,img,Description")] Tour tour)
+        {          
+            tour.Duration = Convert.ToInt32((tour.ReturnDate).DayOfYear - (tour.DepartmentDate).DayOfYear);
+            _context.Add(tour);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AdminCRUDTours/Edit/5
@@ -86,17 +92,17 @@ namespace TravelAgency_Prod.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Country,PersonCount,Cost,DepartmentDate,ReturnDate,Duration,Hotel,TourType")] Tour tour)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Country,City,PersonCount,Cost,DepartmentDate,ReturnDate,Available,Hotel,CategoryId,img,Description")] Tour tour)
         {
             if (id != tour.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            
                 try
                 {
+                    tour.Duration = Convert.ToInt32((tour.ReturnDate).DayOfYear - (tour.DepartmentDate).DayOfYear);
                     _context.Update(tour);
                     await _context.SaveChangesAsync();
                 }
@@ -112,8 +118,7 @@ namespace TravelAgency_Prod.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(tour);
+            
         }
 
         // GET: AdminCRUDTours/Delete/5

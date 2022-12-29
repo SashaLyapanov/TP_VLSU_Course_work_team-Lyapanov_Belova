@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TravelAgency_Prod.Models.Client>
+
+@{
+    ViewData["Title"] = "Clients";
+}
+@{
+    Layout = "_LayoutManager";
+}
+
+<div>
+    <section class="section-3">
+        <div class="blur">
+            @{
+                <form asp-controller="TourManagers" asp-action="ClientsListWithSearch" method="get">
+                    <div class="container-section-3" id="container-section-3">
+                        <div class="search-box">
+                            <input class="search-txt-1 search-1" type="text" name="Surname" placeholder="Фамилия">
+                            <input class="search-txt-2 search-1" type="text" name="Name" placeholder="Имя">
+                            <input type="submit" class="serch-btn btn-otpravit" value="Отправить" />
+                        </div>
+                    </div>
+                </form>
+
+                @foreach (var client in Model)
+                {
+
+                    <div class="container-section-3" id="container-section-3-1">
+                        <a class="element-tour" asp-controller="TourManagers" asp-action="ClientDetail" asp-route-id="@client.Id">
+                            <div class="element-tour-1">
+                                <div class="img-client"></div>
+                                <div class="inf-tour" id="inf-tour-1">
+                                    <h1 class="dataTour1" id="dataTour-1">Фамилия</h1>
+                                    <p class="dataTour1">Имя:</p>
+                                    <p class="dataTour1">Отчество:</p>
+                                    <p class="dataTour1">Телефон:</p>
+                                </div>
+                                <div class="inf-tour" id="inf-tour-2">
+                                    <h1 class="dataTour" id="dataTour-1">@Html.DisplayFor(modelItem => client.Surname)</h1>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => client.Name)</p>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => client.Patronymic)</p>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => client.Phone)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+</div>

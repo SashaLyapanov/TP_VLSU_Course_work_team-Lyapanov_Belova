@@ -1,0 +1,17 @@
+﻿@model TravelAgency_Prod.Models.Favourite
+
+@{
+    Layout = "_LayoutClients";
+}
+
+
+
+
+<div class="row-favorite">
+    <h1>Выполнено успешное добавление тура в раздел Избранное</h1> <!--Вставить фотку или данные пациента-->
+
+    @{
+        int id = (int)TempData["userIdToIndex"];
+    }
+    <a asp-controller="Clients" asp-action="Index" asp-route-id="@id" class="btn-otpravit">Вернуться на гравную страницу</a>
+</div>

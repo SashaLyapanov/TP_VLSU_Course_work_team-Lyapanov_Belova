@@ -1,58 +1,72 @@
-﻿@model IEnumerable<TravelAgency_Prod.Models.Tour>
+﻿@using TravelAgency_Prod.Models
+@model IEnumerable<Tour>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ToursList";
 }
 @{
-    Layout = "_LayoutAdmin";
+    Layout = "_LayoutManager";
 }
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <title>Список туров</title>
+    <script src="https://kit.fontawesome.com/3788136fec.js" crossorigin="anonymous"></script> <!-- fontawesome.com -->
+</head>
 <div>
     <section class="section-3">
         <div class="blur">
-            @{
-                <form asp-controller="Admin" asp-action="ToursListWithSearch" method="get">
-                    <div class="container-section-3" id="container-section-3">
-                        <div class="search-box">
-                            <input class="search-txt-1" type="text" name="Country" placeholder="Страна">
-                            <input class="search-txt" type="date" name="DepartureDate" placeholder="Дата отъезда">
-                            <input class="search-txt" type="date" name="ReturnDate" placeholder="Дата приезда">
-                            <input class="search-txt-2" type="text" name="PersonCount" placeholder="Количество людей">
-
+    @{
+                <form asp-controller="TourManagers" asp-action="ToursListWithSearch" method="get">
+            <div class="container-section-3" id="container-section-3">
+                <div class="search-box">
+                    <input class="search-txt-1" type="text" name="Country" placeholder="Страна">
+                    <input class="search-txt" type="date" name="DepartureDate" placeholder="Дата отъезда">
+                    <input class="search-txt" type="date" name="ReturnDate" placeholder="Дата приезда">
+                    <input class="search-txt-2" type="text" name="PersonCount" placeholder="Количество людей">
                             @*<a class="search-btn" asp-controller="Movies" asp-action="Index" method="get">*@
                             <input type="submit" class="serch-btn btn-otpravit" value="Отправить" />
                             @*<i class="fa-solid fa-magnifying-glass"></i>
-                        </a>*@
-                        </div>
-                    </div>
-                </form>
+                    </a>*@
+                </div>
+            </div>
+        </form>
 
 
-                <section class="section-for-creating-btn">
-                    <a asp-action="Create">Создать новый тур</a>
-                </section>
 
+        
+
+         
 
             @foreach (var tour in Model)
                 {
-
+            
                     <div class="container-section-3" id="container-section-3-1">
-                        <a class="element-tour" asp-controller="AdminCRUDTours" asp-action="Details" asp-route-id="@tour.Id">
+                        <a class="element-tour" asp-controller="TourManagers" asp-action="TourDetail" asp-route-id="@tour.Id">
                             <div class="element-tour-1">
                                 <div class="img-tour"></div>
                                 <div class="inf-tour" id="inf-tour-1">
-                                    <h1 class="dataTour1" id="dataTour-1">Тур:</h1>
+                                    <h1 class="dataTour1" id="dataTour-1">Название тура:</h1>
                                     <p class="dataTour1">Страна:</p>
                                     <p class="dataTour1">Кличество человек:</p>
                                     <p class="dataTour1">Количество дней:</p>
                                     <p class="dataTour1">Тип тура:</p>
                                     <p class="dataTour1">Наличие:</p>
+                                    <p class="dataTour1">Цена:</p>
                                 </div>
                                 <div class="inf-tour" id="inf-tour-2">
-                                    <h1 class="dataTour" id="dataTour-1">@Html.DisplayFor(modelItem => tour.Name)</h1>
-                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Country)</p>
-                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.PersonCount)</p>
-                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Duration)</p>
+                                    <h1 class="dataTour" id="dataTour-1">@Html.DisplayFor(modelItem => tour.Name)</h1>                                    
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Country)</p>                                    
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.PersonCount)</p>                                    
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => tour.Duration)</p>                                    
                                     <p class="dataTour">
                                         @{
                                             string massageCategory;
@@ -66,8 +80,8 @@
                                             }
                                         }
                                         @massageCategory
-                                    </p>
-                                    <p class="dataTour">
+                                    </p>                                    
+                                    <p class ="dataTour">
                                         @{
                                             string massageAvailable;
                                             if (tour.Available == true)
@@ -85,28 +99,19 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
-                }
-            }
-        </div>
-    </section>
-</div>              
-
-                @*<td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td> *@
-            
-
-
-
-
-
-
-
-
-
-
-
+                    </div>    
                     
+                }
+
+           
+            
+     }
+        </div>
+    </section>  
+</div>
+</html>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,0 +1,40 @@
+﻿@model TravelAgency_Prod.Models.Client
+
+@{
+    ViewData["Title"] = "ClientDetail";
+}
+
+@{
+    Layout = "_LayoutManager";
+}
+
+
+
+
+<section class="section-3">
+    <div class="blur">
+        <div class="container-section-inf-tour">
+            <div class="image-tour">
+                <div class="image-tour-name">
+                    <h1 class="information-name-tour">@Html.DisplayFor(model => model.Name)</h1>
+                </div>
+                <div class="image-tour-btn">
+                    <a class="favorite-btn" asp-controller="TourManagers" asp-action="InfoClientsBasket">
+                        
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="information-tour">
+                <p class="information-tour-list-name">Фамилия: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Surname)</nobr></p>
+                <p class="information-tour-list-name">Имя: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Name)</nobr></p>
+                <p class="information-tour-list-name">Отчество: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Patronymic)</nobr></p>
+                <p class="information-tour-list-name">E-mail: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Email)$</nobr></p>
+                <p class="information-tour-list-name">Паспорт: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Pasport)</nobr></p>
+                <p class="information-tour-list-name">Телефон: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Phone)</nobr></p>
+                <p class="information-tour-list-name">Виза: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Visa)</nobr></p>                
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,74 @@
+﻿@model TravelAgency_Prod.Models.Tour
+
+@{
+    ViewData["Title"] = "TourDetail";
+}
+
+@{
+    Layout = "_Layout";
+}
+
+
+
+
+<section class="section-3">
+    <div class="blur">
+        <div class="container-section-inf-tour">
+            <div class="image-tour">
+                <div class="image-tour-name">
+                    <h1 class="information-name-tour">Тур @Html.DisplayFor(model => model.Name)</h1>
+                </div>
+                <div class="image-tour-btn">
+                    <a class="favorite-btn" asp-controller="Account" asp-action="Login">
+
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </a>
+                    <a class="favorite-btn" asp-controller="Account" asp-action="Login">
+
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="information-tour">
+                <p class="information-tour-list-name">Страна: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Country)</nobr></p>
+                <p class="information-tour-list-name">Город: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.City)</nobr></p>
+                <p class="information-tour-list-name">Количество людей: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.PersonCount)</nobr></p>
+                <p class="information-tour-list-name">Стоимость: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Cost)$</nobr></p>
+                <p class="information-tour-list-name">Дата отъезда: <nobr class="information-tour-list-inf">@DateOnly.FromDateTime(Model.DepartmentDate)</nobr></p>
+                <p class="information-tour-list-name">Дата прибытия: <nobr class="information-tour-list-inf">@DateOnly.FromDateTime(Model.ReturnDate)</nobr></p>
+                <p class="information-tour-list-name">Длительность: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Duration)</nobr></p>
+                <p class="information-tour-list-name">Отель: <nobr class="information-tour-list-inf">@Html.DisplayFor(model => model.Hotel)</nobr></p>
+                <p class="information-tour-list-name">Категория: <nobr class="information-tour-list-inf">
+                        @{
+                            if (Model.CategoryId == 1)
+                            {
+                                <nobr class="information-tour-list-inf">
+                                All in cluisive 
+                                </nobr> 
+                            }                            
+                            else {
+                                <nobr class="information-tour-list-inf">
+                                Business
+                                </nobr>
+                            };
+                        }</nobr></p>
+                <p class="information-tour-list-name">Наличие тура: <nobr class="information-tour-list-inf">
+                        @if (Model.Available)
+                        {
+                            <nobr class="information-tour-list-inf">
+                            Доступен к продаже
+                            </nobr>
+                        }
+                        else
+                        {
+                            <nobr class="information-tour-list-inf">
+                            Тур недоступен к продаже
+                            </nobr>
+                        }
+                    </nobr></p>
+                <p class="information-tour-list-name" id="information-tour-list-name-details">Описание тура:</p><p class="information-tour-list-name-details">@Html.DisplayFor(model => model.Description)</p>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</section>

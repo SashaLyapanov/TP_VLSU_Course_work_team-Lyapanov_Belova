@@ -1,0 +1,74 @@
+﻿@using TravelAgency_Prod.Models
+@model IEnumerable<Client>
+
+@{
+    ViewData["Title"] = "ClientList";
+}
+@{
+    Layout = "_LayoutClients";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <title>Список клиентов</title>
+    <script src="https://kit.fontawesome.com/3788136fec.js" crossorigin="anonymous"></script> <!-- fontawesome.com -->
+</head>
+<div>
+    <section class="section-3">
+        <div class="blur">
+            @{
+                <form asp-controller="TourManagers" asp-action="ClientsListWithSearch" method="get">
+                    <div class="container-section-3" id="container-section-3">
+                        <div class="search-box">
+                            <input class="search-txt-1" type="text" name="Фамилия" placeholder="Фамилия">
+                            <input class="search-txt" type="text" name="Имя" placeholder="Имя">
+                            <input type="submit" class="serch-btn btn-otpravit" value="Отправить" />
+                            @*<i class="fa-solid fa-magnifying-glass"></i>
+                        </a>*@
+                        </div>
+                    </div>
+                </form>
+
+
+
+                @foreach (var client in Model)
+                {
+
+                    <div class="container-section-3" id="container-section-3-1">
+                        <a class="element-tour" asp-controller="TourManagers" asp-action="ClientDetail" asp-route-id="@client.Id">
+                            <div class="element-tour-1">
+                                <div class="img-tour"></div>
+                                <div class="inf-tour" id="inf-tour-1">
+                                    <h1 class="dataTour1" id="dataTour-1">Фамилия</h1>
+                                    <p class="dataTour1">Имя:</p>
+                                    <p class="dataTour1">Отчество:</p>
+                                    <p class="dataTour1">Телефон:</p>
+                                </div>
+                                <div class="inf-tour" id="inf-tour-2">
+                                    <h1 class="dataTour" id="dataTour-1">@Html.DisplayFor(modelItem => client.Surname)</h1>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => client.Name)</p>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => client.Patronymic)</p>
+                                    <p class="dataTour">@Html.DisplayFor(modelItem => client.Phone)</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+</div>
+</html>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

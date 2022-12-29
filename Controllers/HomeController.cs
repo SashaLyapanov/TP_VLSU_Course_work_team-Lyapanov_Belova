@@ -18,25 +18,11 @@ namespace TravelAgency.Controllers
             _logger = logger;
         }
 
-        /*public async Task<IActionResult> EmailValidation([Bind("Email")] TourManager tourManager, [Bind("Email")] Client client)
-        {
-            if (_context.tourManagers.Any(x => x.Email == tourManager.Email))
-            {
-                return Json(false);
-            }
-            return Json(true);
-
-        }*/
-
         public IActionResult Index()
         {
             return View();
         }
-        [HttpGet]
-        /*        public IActionResult Index1()
-                {
-                    return View();
-                }*/
+
 
 
 
@@ -60,15 +46,70 @@ namespace TravelAgency.Controllers
 
 
 
-        public IActionResult Privacy()
+
+
+        [HttpGet]
+        public async Task<IActionResult> ToursList()
+        {
+            var tours = _context.tours;
+            return View(tours);
+        }
+
+
+        public async Task<IActionResult> ToursListWithSearch(string Country, DateTime DepartureDate, DateTime ReturnDate, string PersonCount)
+        {
+            
+            var tours = from m in _context.tours select m;
+
+            if (!String.IsNullOrEmpty(Country) && !String.IsNullOrEmpty(DepartureDate.ToString()) && !String.IsNullOrEmpty(ReturnDate.ToString()) && !String.IsNullOrEmpty(PersonCount))
+            {
+                tours = tours.Where(a => a.Country == Country && a.DepartmentDate == DepartureDate && a.ReturnDate == ReturnDate && a.PersonCount == Int32.Parse(PersonCount));
+            }
+
+
+            return View(tours);
+        }
+
+
+        public IActionResult TourDetail(int id)
+        {
+
+
+            if (id == null || _context.tourManagers == null)
+            {
+                return NotFound();
+            }
+
+            var tour = _context.tours.FirstOrDefault(t => t.Id == id);
+            if (tour == null)
+            {
+                return NotFound();
+            }
+
+            Response.Cookies.Append("tourId", id.ToString());
+            return View(tour);
+        }
+
+
+
+
+        /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }*/
+
+        [HttpGet]
+        public async Task<IActionResult> AboutUs()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+
+        [HttpGet]
+        public async Task<IActionResult> Contacts()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

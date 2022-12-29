@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,20 +15,18 @@
 </head>
 <body>
     <header>
-            <div class="container">
-                <div class="header-line">
-                    <a asp-controller="Home" asp-action="Index" />
-                    <div class="logo">
-                    </div>
-                    <div class="nav">
-                    <a class="nav-item" asp-controller="Home" asp-action="AboutUs">О нас</a>
-                    <a class="nav-item" asp-controller="Home" asp-action="ToursList">Туры</a>
-                    <a class="nav-item" asp-controller="Home" asp-action="Contacts">Контакты</a>
-                    <a class="nav-item" asp-controller="Account" asp-action="Register">Регистрация</a>
-                    <a class="nav-item" asp-controller="Account" asp-action="Login">Вход</a>
-                    </div>
+        <div class="container">
+            <div class="header-line">
+                <div class="logo">
+                </div>
+                <div class="nav">
+                    <a class="nav-item" asp-controller="Admin" asp-action="AboutUs">О нас</a>
+                    <a class="nav-item" asp-controller="AdminCRUDTours" asp-action="Index">Туры</a>
+                    <a class="nav-item" asp-controller="Admin" asp-action="Contacts">Контакты</a>
+                    <a class="nav-item" asp-controller="Account" asp-action="Logout">Выход</a>
                 </div>
             </div>
+        </div>
     </header>
     <div>
         <main role="main" class="pb-3">
@@ -55,9 +53,7 @@
             </div>
         </div>
     </footer>
-
-
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+   @*@ <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>*@
     @await RenderSectionAsync("Scripts", required: false)

@@ -4,49 +4,44 @@
     ViewData["Title"] = "Details";
 }
 @{
-    Layout = "_LayoutAdmManag";
+    Layout = "_LayoutAdmin";
 }
 
 
-<h1>Details</h1>
 
-<div>
-    <h4>TourManager</h4>
-    <hr />
+
+<div class="container-register container-style">
+    <h4>Информация о турменеджере</h4>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Surname)
-        </dt>
-        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Surname)
-        </dd>
+        </dt>
+       
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
-        </dd>
+        </dt>
+ 
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Patronymic)
-        </dt>
-        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Patronymic)
-        </dd>
+        </dt>
+        
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Email)
-        </dd>
+        </dt>
+       
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Password)
-        </dd>
+        </dt>
+        
     </dl>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary btn-otpravit">Edit</a> |
+        <a asp-action="Index" class="btn btn-primary btn-otpravit">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+

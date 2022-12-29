@@ -1,0 +1,19 @@
+﻿@model TravelAgency_Prod.Models.Client
+@{
+    Layout = "_LayoutManager";
+}
+
+<div class="row-favorite ">
+    <div class="container-register container-style">
+    <form asp-controller="TourManagers" asp-action="SuccessfullAddTourInClientsBasket">
+        <div class="form-group ">
+                <label asp-for="Email" class="control-label"></label>
+                <input class="style-register" asp-for=" Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+            <input type="submit" value="AddingTour" class="btn btn-primary btn-otpravit" />
+    </div>
+    </form>
+    </div>
+</div>

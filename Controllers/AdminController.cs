@@ -38,6 +38,32 @@ namespace TravelAgency.Controllers
         }
 
 
+
+        public async Task<IActionResult> ToursListWithSearch(string Country, DateTime DepartureDate, DateTime ReturnDate, string PersonCount)
+        {
+
+            var tours = from m in _context.tours select m;
+
+            if (!String.IsNullOrEmpty(Country) && !String.IsNullOrEmpty(DepartureDate.ToString()) && !String.IsNullOrEmpty(ReturnDate.ToString()) && !String.IsNullOrEmpty(PersonCount))
+            {
+                tours = tours.Where(a => a.Country == Country && a.DepartmentDate == DepartureDate && a.ReturnDate == ReturnDate && a.PersonCount == Int32.Parse(PersonCount));
+            }
+
+
+            return View(tours);
+        }
+
+
+        public async Task<IActionResult> AboutUs()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Contacts()
+        {
+            return View();
+        }
+
     }
 }
 

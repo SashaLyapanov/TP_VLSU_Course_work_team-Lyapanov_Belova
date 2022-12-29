@@ -4,73 +4,103 @@
     ViewData["Title"] = "Details";
 }
 @{
-    Layout = "_LayoutAdmManag";
+    Layout = "_LayoutAdmin";
 }
 
 
-<h1>Details</h1>
 
-<div>
-    <h4>Tour</h4>
-    <hr />
+<div class="container-register container-style">
+    <h4>Детали тура</h4>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Country)
+            @Html.DisplayFor(model => model.Country)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Country)
+            
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayFor(model => model.City)
+        </dt>
+        <dd class="col-sm-10">
+            
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PersonCount)
+            @Html.DisplayFor(model => model.PersonCount)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PersonCount)
+            
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Cost)
+            @Html.DisplayFor(model => model.Cost)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cost)
+            
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DepartmentDate)
+            @DateOnly.FromDateTime(Model.DepartmentDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DepartmentDate)
+            
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ReturnDate)
+            @DateOnly.FromDateTime(Model.ReturnDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReturnDate)
+            
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Duration)
+            @Html.DisplayFor(model => model.Duration)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Duration)
+            
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Available)
+            @Html.DisplayFor(model => model.Available)
+        </dt>
+        <dd class="col-sm-10">
+            
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Hotel)
+            @Html.DisplayFor(model => model.Hotel)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Hotel)
+            
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryId)
+            @Html.DisplayNameFor(model => model.img)
+            @Html.DisplayFor(model => model.img)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategoryId)
+            
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            
         </dd>
     </dl>
+    <div>
+        <a asp-controller="AdminCRUDTours" asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary btn-otpravit">Edit</a> |
+        <a asp-controller="AdminCRUDTours" asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-primary btn-otpravit">Delete</a> |
+        <a asp-controller="AdminCRUDTours" asp-action="Index" class="btn btn-primary btn-otpravit">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
